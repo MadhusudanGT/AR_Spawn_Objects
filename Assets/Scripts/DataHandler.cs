@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -8,21 +9,15 @@ public class DataHandler : MonoBehaviour
     private GameObject furniture;
 
     [SerializeField] private ButtonManager buttonPrefab;
-    [SerializeField] private GameObject buttonContainer;    
-    [SerializeField] private List<Item> items;    
-    // [SerializeField] private String label;    
-    
+    [SerializeField] private GameObject buttonContainer;
+    [SerializeField] private List<ItemList> items;
 
-    
-    private int currrent_id = 0;
-    
-    
     private static DataHandler instance;
-    public static DataHandler Instance 
+    public static DataHandler Instance
     {
         get
         {
-            if(instance==null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<DataHandler>();
             }
@@ -30,51 +25,44 @@ public class DataHandler : MonoBehaviour
         }
     }
 
-    private void Start() {
-        // items = new List<Item>();
-        LoadItems();
-        // await Get(label);
-        CreateButtons();
-    }
-
-    void LoadItems()
+    private void Start()
     {
-        var item_obj = Resources.LoadAll("Items",typeof(Item));
-        foreach (var item in item_obj)
-        {
-            items.Add(item as Item);
-        }
+        CreateButtons();
     }
 
     void CreateButtons()
     {
-        foreach (Item i in items)
+        foreach (ItemList i in items)
         {
-            ButtonManager b = Instantiate(buttonPrefab,buttonContainer.transform);
-            b.ItemId = currrent_id;
-            b.ButtonTexture = i.itemImage;
-            currrent_id++;
+            ButtonManager b = Instantiate(buttonPrefab, buttonContainer.transform);
+            b.ButtonTexture = i.items.itemImage;
+            b.itemType = i.items.itemType;
         }
     }
 
-    public void SetFurniture(int id)
+    public void SetFurniture(Items selectedType)
     {
-        furniture = items[id].itemPrefab;
+        ItemList filterItem = items.FirstOrDefault(item => item.items.itemType == selectedType);
+        furniture = filterItem.items.itemPrefab;
     }
 
     public GameObject GetFurniture()
     {
         return furniture;
     }
+}
 
-    // public async Task Get(String label)
-    // {
-    //     var locations = await Addressables.LoadResourceLocationsAsync(label).Task;
-    //     foreach (var location in locations)
-    //     {
-    //         var obj = await Addressables.LoadAssetAsync<Item>(location).Task;
-    //         items.Add(obj);
-    //     }
-    // }
+public enum Items
+{
+    LAMP,
+    CHAIR_1,
+    SOFA_1,
+    SOFA_2,
+    SOFA_3,
+}
 
+[System.Serializable]
+public struct ItemList
+{
+    public Item items;
 }

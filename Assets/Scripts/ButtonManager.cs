@@ -8,7 +8,7 @@ public class ButtonManager : MonoBehaviour
 {
     private Button btn;
     [SerializeField] private RawImage buttonImage;
-
+    public Items itemType { set; get; }
     public GameObject furniture;
 
     private int itemId;
@@ -51,6 +51,6 @@ public class ButtonManager : MonoBehaviour
 
     void SelectObject()
     {
-        DataHandler.Instance.SetFurniture(itemId);
+        DataHandler.Instance.SetFurniture(itemType);
     }
 }

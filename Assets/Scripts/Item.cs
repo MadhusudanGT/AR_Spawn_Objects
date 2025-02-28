@@ -7,4 +7,5 @@ public class Item : ScriptableObject
     public float price;
     public GameObject itemPrefab;
     public Sprite itemImage;
+    public Items itemType;
 }

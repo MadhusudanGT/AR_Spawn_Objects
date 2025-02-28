@@ -1532,9 +1532,10 @@ MonoBehaviour:
     type: 3}
   buttonContainer: {fileID: 529907215}
   items:
-  - {fileID: 11400000, guid: b80cb1b0d860d0f49b8443f31726a1bb, type: 2}
-  - {fileID: 11400000, guid: 0030f83dd4e633a4281cb6cdfbdca5d7, type: 2}
-  - {fileID: 11400000, guid: 9b7252260b168e048be3e773c386fa85, type: 2}
+  - items: {fileID: 11400000, guid: b80cb1b0d860d0f49b8443f31726a1bb, type: 2}
+  - items: {fileID: 11400000, guid: 0030f83dd4e633a4281cb6cdfbdca5d7, type: 2}
+  - items: {fileID: 11400000, guid: e94b27c2aa5f3514db82b63b0453ba01, type: 2}
+  - items: {fileID: 11400000, guid: 9b7252260b168e048be3e773c386fa85, type: 2}
 --- !u!4 &1923158389
 Transform:
   m_ObjectHideFlags: 0
